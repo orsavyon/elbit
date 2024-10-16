@@ -1,0 +1,1 @@
+dd if=/dev/sda | xz -vT0 > /home/img/filename.img.xz
