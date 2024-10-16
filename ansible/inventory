@@ -1,0 +1,51 @@
+vms:
+ hosts:      
+  IMG-test:
+   ansible_host: 10.0.246.15        
+  UBU-VM-1:
+   ansible_host: 10.0.248.39
+ vars:
+  ansible_ssh_user: user    
+
+desktops:
+ hosts:  
+  UBU-001:
+   ansible_host: 10.35.80.115
+  UB-E013881:
+   ansible_host: 10.35.80.117    
+  x119:
+   ansible_host: 10.35.80.119    
+  x120:
+   ansible_host: 10.35.80.120        
+  x121:
+   ansible_host: 10.35.80.121    
+  x122:
+   ansible_host: 10.35.80.122    
+  x123:
+   ansible_host: 10.35.80.123    
+  x124:
+   ansible_host: 10.35.80.124    
+  UB-E038167: 
+   ansible_host: 10.35.80.126    
+  x127:
+   ansible_host: 10.35.80.127    
+  x128:
+   ansible_host: 10.35.80.128    
+  x129:
+   ansible_host: 10.35.80.129    
+  x130:
+   ansible_host: 10.35.80.130
+  UBU-002:
+   ansible_host: 10.35.80.131        
+  x132:
+   ansible_host: 10.35.80.132    
+  x134:
+   ansible_host: 10.35.80.134
+  eli-ubi-dell-gpu:
+   ansible_host: 10.35.80.136        
+  x137:
+   ansible_host: 10.35.80.137      
+  x143:
+   ansible_host: 10.35.80.143   
+ vars:
+  ansible_ssh_user: user
