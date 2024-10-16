@@ -1,0 +1,66 @@
+- name: Certification update
+  hosts: all
+  become: true
+  gather_facts: false
+  
+  tasks:
+    
+    #- name: Delete files and subdirectories inside the folder
+     # command: find /usr/local/share/ca-certificates -mindepth 1 -delete
+    
+    - name: Copy certs to hosts
+      copy:
+        src: "/home/user/DevbitCertificates/"
+        dest: "/usr/local/share/ca-certificates/"
+        
+    - name: Install ca-certificates package
+      apt:
+        name: ca-certificates
+        state: present
+        
+    - name: Update ca-certificates
+      command: sudo update-ca-certificates
+
+    - name: Create policies.json file if it doesn't exist
+      file:
+        path: /usr/lib/firefox/distribution/policies.json
+        state: touch
+        mode: '0644'
+
+    - name: Delete existing content in policies.json
+      lineinfile:
+        path: /usr/lib/firefox/distribution/policies.json
+        state: absent
+        regexp: '.*'
+      register: delete_result
+      changed_when: delete_result.changed
+
+    - name: Add new content to policies.json
+      blockinfile:
+        path: /usr/lib/firefox/distribution/policies.json
+        marker: ""
+        block: |
+          {
+            "policies": {
+              "Certificates": {
+                "ImportEnterpriseRoots": true,
+                "Install":
+                  ["ElbitSystemRootCA.crt", "/usr/local/share/ca-certificates/ElbitSystemRootCA.crt"],
+                  ["devbit-ECCA-CA.crt", "/usr/local/share/ca-certificates/devbit-ECCA-CA.crt"],
+              }
+            }
+          }
+        state: present
+      when: delete_result.changed or not delete_result
+      
+    - name: Find home directories
+      find:
+        paths: /home
+        file_type: directory
+        recurse: no
+        excludes: "root"    # Exclude the root home directory, if needed
+      register: home_dirs
+
+    - name: Install CA certificate for each user for chrome
+      command: "certutil -d sql:{{ item.path }}/.pki/nssdb -A -t TC -n 'ElbitSystemRootCA.crt' -i /usr/local/share/ca-certificates/ElbitSystemRootCA.crt"
+      loop: "{{ home_dirs.files }}"                   
