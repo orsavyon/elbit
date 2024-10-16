@@ -1,0 +1,22 @@
+- name: Add Repository, Update, and Upgrade
+  hosts: all
+  become: yes
+  tasks:
+    - name: Check if repository line already exists
+      command: grep -q "deb [arch=amd64 trusted=yes] http://artifactory.devbit.io/artifactory/Remote-debian-DMZ-google-chrome/linux/chrome/deb stable main" /etc/apt/sources.list
+      register: repo_line_exists
+      changed_when: false
+      ignore_errors: yes
+
+    - name: Add repository line to sources.list
+      lineinfile:
+        path: /etc/apt/sources.list
+        line: "deb [arch=amd64 trusted=yes] http://artifactory.devbit.io/artifactory/Remote-debian-DMZ-google-chrome/linux/chrome/deb stable main"
+        state: present
+        insertafter: EOF
+      when: repo_line_exists.rc != 0
+      
+    - name: Upgrade Google Chrome
+      apt:
+        name: google-chrome-stable
+        state: latest  
