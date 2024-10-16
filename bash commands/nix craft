@@ -1,0 +1,108 @@
+---------------------------------------------------------------------------Useful Shit-------------------------------------------------------------------------------
+
+Network location for GHOST backups:
+-----------------------------------
+\\karm-nas2\
+
+Network Drives Mapping:
+-----------------------
+Zabadim :  \\esl\dfs\zabadim
+
+offline McAfee .DAT files download:
+-------------------------------------
+https://www.mcafee.com/enterprise/en-us/downloads/security-updates.html
+
+---------------------------------------------------------------------------END Useful Shit-----------------------------------------------------------------------------
+
+cut -d: -f1 /etc/passwd
+
+e013881@UB-E013881:/home/user$ docker run --gpus all artifactory.devbit.io/docker/nvidia/cuda:latest nvidia-smi
+
+DISPLAY=159.203.157.46:0.0 nohup remmina
+
+unset DISPLAY
+export DISPLAY=localhost:10.0
+
+sudo mount -t cifs -o user=e032291p@devbit.io //10.0.231.151/visdom_2d /home/DEVBITSHARES
+
+sudo mkdir /home/DEVBIT
+sudo chmod 777 /home/DEVBIT
+mkdir /home/DEVBIT/aerospace_cvai
+sudo mount -t cifs -o user=e015579@devbit.io //devbitshares/aerospace_cvai/ /home/DEVBIT/aerospace_cvai
+
+user- e015579
+pass- Eldd141278!
+
+
+ 
+
+
+
+sudo mount -t cifs -o user=e015579@devbit.io //devbitshares/aerospace_cvai/ /home/DEVBIT/aerospace_cvai
+
+//devbitshares/aerospace_cvai/ /home/DEVBIT/aerospace_cvai cifs username=e015579@devbit.io,password=Eldd141278!,iocharset=utf8,file_mode=0777,dir_mode=0777
+
+
+
+(pv -n /dev/nvme0n1 | dd of=/home/user/stuff/eldad-tower.img bs=128M conv=notrunc,noerror) 2>&1 | dialog --gauge "Cloning, please wait..." 10 70 0
+
+(pv -n /dev/sda | dd of=/dev/sdX bs=128M conv=notrunc,noerror) 2>&1 | dialog --gauge "Running dd command (cloning), please wait..." 10 70 0
+
+
+
+https://askubuntu.com/questions/73287/how-do-i-install-a-root-certificate
+
+openssl x509 -inform DER -in s3.cer -out s3.crt
+openssl x509 -outform der -in portal.pem -out portal.crt
+
+sudo cp *.crt /usr/share/ca-certificates/
+
+sudo cp *.crt /usr/share/ca-certificates/
+
+
+sudo mount -t cifs -o user=e032291p@devbit.io //devbitshares/VISDOM_2D/ /home/user/stuff
+
+
+sudo apt-get install -y ca-certificates
+sudo cp *.crt /usr/share/ca-certificates/
+sudo dpkg-reconfigure ca-certificates
+
+sudo cp /etc/apt/trusted.gpg /etc/apt/trusted.gpg.d
+
+####################################################################################################
+Disable/blacklist Nouveau nvidia driver on Ubuntu 20.04 step by step instructions
+First step is to Blacklist Nvidia nouveau driver. Open up terminal and enter the following commands:
+ sudo bash -c "echo blacklist nouveau > /etc/modprobe.d/blacklist-nvidia-nouveau.conf"
+ sudo bash -c "echo options nouveau modeset=0 >> /etc/modprobe.d/blacklist-nvidia-nouveau.conf"
+Confirm the content of the newly created modeprobe file blacklist-nvidia-nouveau.conf:
+ cat /etc/modprobe.d/blacklist-nvidia-nouveau.conf
+blacklist nouveau
+options nouveau modeset=0
+Enter the following Linux command to update kernel initramfs:
+ sudo update-initramfs -u
+#####################################################################################################
+
+
+mount -o rw,remount /
+
+smbget smb://devbitshares/share/Greg/sources.list --user e032291p --workgroup devbit.io
+
+smbget smb://10.0.231.151/Share/Installs/PyCharm/Linux/pycharm-professional-2022.2.1.tar.gz --user e032291p --workgroup devbit.io
+
+
+sudo ln -s /opt/pycharm-XXXXX/bin/pycharm.sh /bin/pycharm
+
+DEVBIT DNS 10.0.241.1 10.0.241.2
+
+nmap -R 10.35.80.0/24
+
+nmap -Pn 10.35.80.0/24
+
+dd if=<source> | pv | dd of=<destination>
+
+dd if=/dev/sdb | pv -s 2G | dd of=DriveCopy1.dd bs=128M
+
+dd if=/dev/sda | xz -vT0 > /mnt/external/filename.img.gz
+
+
+Add "{installation home}/bin" to your PATH environment
